@@ -43,4 +43,23 @@ class TP1Ex1Q1Controller extends AbstractController
             'dateDuJour' => date('d/m/Y H:i:s')
         ]);
     }
+    
+    #[Route('/javascript', name: 'javascript')]
+    public function javascript(): Response
+    {
+        return $this->render('tp1/javascript.html.twig');
+    }
+
+        #[Route('/javascript_Test', name: 'javascript_test')]
+    public function javascript_test(): Response
+    {
+        return $this->render('tp1/javascript_Test.html.twig');
+    }
+
+    #[Route('/jquery', name: 'jquery')]
+    public function jquery(): Response
+    {
+        return $this->render('tp1/jquery.html.twig');
+    }
+    
 }

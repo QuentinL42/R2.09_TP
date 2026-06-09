@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Exercice JavaScript</title>
+</head>
+<body>
+    <h1>Exercice 2 - JavaScript</h1>
+
+    <h2>Question 2.1</h2>
+    <button onclick="demanderAge()">Calculer l'âge</button>
+    <p id="id_Age"></p>
+
+    <h2>Question 2.2</h2>
+    <p id="paraStyle" onmouseover="survolOn()" onmouseout="survolOff()">
+        Passe la souris sur ce texte
+    </p>
+
+    <h2>Question 2.3</h2>
+    <ul id="listeBUT">
+        <li>BUT RT</li>
+        <li>BUT GIM</li>
+    </ul>
+
+    <button onclick="ajouterBUT()">Ajouter un élément</button>
+    <button onclick="supprimerBUT()">Supprimer le dernier</button>
+
+    <script>
+        function demanderAge() {
+            let annee = prompt("Entrez votre année de naissance :");
+            annee = parseInt(annee);
+
+            if (isNaN(annee)) {
+                alert("Erreur : vous devez entrer une valeur numérique.");
+                return;
+            }
+
+            const anneeActuelle = new Date().getFullYear();
+            const age = anneeActuelle - annee;
+
+            document.getElementById("id_Age").textContent = "Votre âge est : " + age + " ans";
+        }
+
+        function survolOn() {
+            const p = document.getElementById("paraStyle");
+            p.style.fontSize = "30px";
+            p.style.fontStyle = "italic";
+            p.style.color = "red";
+        }
+
+        function survolOff() {
+            const p = document.getElementById("paraStyle");
+            p.style.fontSize = "";
+            p.style.fontStyle = "";
+            p.style.color = "";
+        }
+
+        function ajouterBUT() {
+            const nomBUT = prompt("Entrez le nom du BUT à ajouter :");
+
+            if (!nomBUT) {
+                return;
+            }
+
+            const ul = document.getElementById("listeBUT");
+            const li = document.createElement("li");
+            li.textContent = nomBUT;
+            ul.appendChild(li);
+        }
+
+        function supprimerBUT() {
+            const ul = document.getElementById("listeBUT");
+
+            if (ul.lastElementChild) {
+                ul.removeChild(ul.lastElementChild);
+            }
+        }
+    </script>
+    <p><a href="{{ path('accueil') }}">Retour</a></p>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Exercice jQuery</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+</head>
+<body>
+    <h1>Exercice 2.4 - jQuery</h1>
+
+    <h2>Âge</h2>
+    <button id="btnAge">Calculer l'âge</button>
+    <p id="id_Age"></p>
+
+    <h2>Survol</h2>
+    <p id="paraStyle">Passe la souris sur ce texte</p>
+
+    <h2>Liste des BUT</h2>
+    <ul id="listeBUT">
+        <li>BUT RT</li>
+        <li>BUT GIM</li>
+    </ul>
+
+    <button id="btnAjouter">Ajouter un élément</button>
+    <button id="btnSupprimer">Supprimer le dernier</button>
+
+    <script>
+        $(document).ready(function () {
+
+            $("#btnAge").click(function () {
+                let annee = prompt("Entrez votre année de naissance :");
+                annee = parseInt(annee);
+
+                if (isNaN(annee)) {
+                    alert("Erreur : vous devez entrer une valeur numérique.");
+                    return;
+                }
+
+                const anneeActuelle = new Date().getFullYear();
+                const age = anneeActuelle - annee;
+
+                $("#id_Age").text("Votre âge est : " + age + " ans");
+            });
+
+            $("#paraStyle").hover(
+                function () {
+                    $(this).css({
+                        "font-size": "30px",
+                        "font-style": "italic",
+                        "color": "red"
+                    });
+                },
+                function () {
+                    $(this).css({
+                        "font-size": "",
+                        "font-style": "",
+                        "color": ""
+                    });
+                }
+            );
+
+            $("#btnAjouter").click(function () {
+                let nouveauBUT = prompt("Entrez le nom du BUT à ajouter :");
+
+                if (!nouveauBUT) {
+                    return;
+                }
+
+                $("#listeBUT").append("<li>" + nouveauBUT + "</li>");
+            });
+
+            $("#btnSupprimer").click(function () {
+                $("#listeBUT li:last").remove();
+            });
+
+        });
+    </script>
+    <p><a href="{{ path('accueil') }}">Retour</a></p>
+</body>
+</html>
