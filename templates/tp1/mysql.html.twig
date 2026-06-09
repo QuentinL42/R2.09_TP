@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang='fr'>
+    <head>
+        <meta charset='utf-8' />
+        <title>MySQL- Exemple 1</title>
+    </head>
+    <body>
+        <h1>MySQL- Exemple 1</h1>
+        Cette page est le résultat du code ci-après : 
+        <br /><img src="Images/mySQL_ex1.png" alt="Code de mySQL_ex1.php"> : <br />
+        <?php
+            try
+            {
+                $bd=new PDO("mysql:host=localhost;dbname=maBdD","login","mdp");
+                $bd->exec('SET NAMES utf8');
+            }
+            catch (Exception $e)
+            {
+                die("Erreur : Connexion impossible");
+            }
+            $sql="SELECT * FROM AVIONS WHERE Loc='Paris'";
+            $req=$bd->prepare($sql); // étape 1 : Préparation
+            $req->execute(); // étape 2 : Exécution
+            $lesEnreg=$req->fetchall(); // étape 3 :Récupération
+            $req->closeCursor(); // étape 4 : Destruction
+            echo "<pres>";
+            print_r ($lesEnreg);
+            echo "</pres>";
+        ?>
+        <p><a href="{{ path('accueil') }}">Retour</a></p>
+    </body>
+</html>

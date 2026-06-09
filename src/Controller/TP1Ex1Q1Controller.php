@@ -50,7 +50,7 @@ class TP1Ex1Q1Controller extends AbstractController
         return $this->render('tp1/javascript.html.twig');
     }
 
-        #[Route('/javascript_Test', name: 'javascript_test')]
+    #[Route('/javascript_Test', name: 'javascript_test')]
     public function javascript_test(): Response
     {
         return $this->render('tp1/javascript_Test.html.twig');
@@ -61,5 +61,39 @@ class TP1Ex1Q1Controller extends AbstractController
     {
         return $this->render('tp1/jquery.html.twig');
     }
+
+    #[Route('/mysql', name: 'mysql')]
+    public function mysql(): Response
+    {
+        return $this->render('tp1/mysql.html.twig');
+    }
     
+    #[Route('/connexion', name: 'connexion')]
+    public function connexion(): Response
+    {
+        return $this->render('tp1/connexion.html.twig');
+    }
+    
+    #[Route('/verification', name: 'verification', methods: ['POST'])]
+    public function verification(Request $request): Response
+    {
+        $login = $request->request->get('login');
+        $motdepasse = $request->request->get('motdepasse');
+        $pdo = new \PDO('mysql:host=127.0.0.1;dbname=tp1;charset=utf8', 'root', '');
+        $sql = "SELECT * FROM informationsconnexion 
+        WHERE login = '$login' AND motdepasse = '$motdepasse'";
+        $resultat = $pdo->query($sql);
+        if ($resultat && $resultat->rowCount() > 0) 
+            {
+                return $this->redirectToRoute('salut', ['login' => $login]);
+            }
+            return new Response("Échec de connexion");
+    }
+    #[Route('/salut/{login}', name: 'salut')]
+    public function salut(string $login): Response
+    {
+        return $this->render('tp1/salut.html.twig', 
+        ['login' => $login]);
+    }
+ 
 }
