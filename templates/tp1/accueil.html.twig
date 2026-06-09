@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Accueil</title>
+</head>
+<body>
+    <h1>Accueil</h1>
+
+    <p><a href="{{ path('date1') }}">Voir la date méthode 1</a></p>
+    <p><a href="{{ path('date2') }}">Voir la date méthode 2</a></p>
+
+    <h2>Formulaire</h2>
+    <form method="post" action="{{ path('bonjour') }}">
+        <label for="prenom">Prénom :</label>
+        <input type="text" id="prenom" name="prenom" required>
+
+        <br><br>
+
+        <label for="nom">Nom :</label>
+        <input type="text" id="nom" name="nom" required>
+
+        <br><br>
+
+        <button type="submit">Valider</button>
+    </form>
+</body>
+</html>
